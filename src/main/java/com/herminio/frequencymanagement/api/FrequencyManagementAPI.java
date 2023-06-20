@@ -1,11 +1,14 @@
 package com.herminio.frequencymanagement.api;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,6 +73,42 @@ public class FrequencyManagementAPI {
 		} catch (Exception e) {
 			logger.error("Erro generico ao salvar funcionario no banco de dados " + e.getCause().toString(),e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao salvar frequencia no banco de dados");
+		}
+	 }
+	 
+	 @GetMapping(path = "getAllFrequency")
+	 public ResponseEntity getAllFrequency() {
+		 
+		try {
+			return ResponseEntity.ok(service.getAllFrequencys());
+			
+		} catch (Exception e) {
+			logger.error("Erro generico ao buscar frequencia no banco de dados " + e.getCause().toString(),e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao buscar frequencia no banco de dados");
+		}
+	 }
+	 
+	 @GetMapping(path = "getAllCompanies")
+	 public ResponseEntity getAllCompanies() {
+		 
+		try {
+			return ResponseEntity.ok(service.getAllCompanies());
+			
+		} catch (Exception e) {
+			logger.error("Erro generico ao buscar companhias no banco de dados " + e.getCause().toString(),e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao buscar companhias no banco de dados");
+		}
+	 }
+	 
+	 @GetMapping(path = "getAllEmployees")
+	 public ResponseEntity getAllEmployees() {
+		 
+		try {
+			return ResponseEntity.ok(service.getAllEmployees());
+			
+		} catch (Exception e) {
+			logger.error("Erro generico ao buscar funcionarios no banco de dados " + e.getCause().toString(),e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao buscar funcionarios no banco de dados");
 		}
 	 }
 }

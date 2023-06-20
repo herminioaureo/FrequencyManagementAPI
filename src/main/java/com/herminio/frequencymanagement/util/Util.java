@@ -1,5 +1,8 @@
 package com.herminio.frequencymanagement.util;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -51,10 +54,58 @@ public class Util {
 			
 			entity.setCompany(company);
 			entity.setEmployee(employee);
-			entity.setDateTime(new Date());
+			
+			ZoneOffset zoneOffSet= ZoneOffset.of("-03:00");
+			OffsetDateTime date = OffsetDateTime.now(zoneOffSet);
+			
+			entity.setDateTime(new Date().from(date.toInstant()));
 			
 			entity.setUuid(UUID.randomUUID().toString());
 		}
 		return entity;
+	}
+	
+	public static Company convertToModel(CompanyEntity entity) {
+		Company company = null;
+		
+		if (entity != null) {
+			company = new Company();
+			company.setIdcompany(entity.getIdcompany());
+			company.setName(entity.getName());
+			company.setSegment(entity.getSegment());
+			company.setUuid(entity.getUuid());
+		}
+		return company;
+	}
+	
+	public static Employee convertToModel(EmployeeEntity entity) {
+		Employee employee = null;
+		
+		if (entity != null) {
+			employee = new Employee();
+			employee.setIdemployee(entity.getIdemployee());
+			employee.setName(entity.getName());
+			employee.setRole(entity.getRole());
+			employee.setUuid(entity.getUuid());
+		}
+		return employee;
+	}
+	
+	public static Frequency convertToModel(FrequencyEntity entity) {
+		Frequency frequency = null;
+		Employee employee = null;
+		Company company = null;
+		
+		if (entity != null) {
+			frequency = new Frequency();
+			employee = convertToModel(entity.getEmployee());
+			company = convertToModel(entity.getCompany());
+			frequency.setCompany(company);
+			frequency.setEmployee(employee);
+			frequency.setDateTime(entity.getDateTime());
+			frequency.setIdfrequency(entity.getIdfrequency());
+			frequency.setUuid(entity.getUuid());
+		}
+		return frequency;
 	}
 }

@@ -15,7 +15,7 @@ public class Frequency {
 	
 	private int idfrequency;
 	private Date dateTime;
-	private int uuid;
+	private String uuid;
 	private Company company;
 	private Employee employee;
 	

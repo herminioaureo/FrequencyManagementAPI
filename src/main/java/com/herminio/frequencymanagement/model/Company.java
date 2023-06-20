@@ -15,6 +15,6 @@ public class Company {
 	private int idcompany;
 	private String name;
 	private String segment;
-	private int uuid;
+	private String uuid;
 
 }

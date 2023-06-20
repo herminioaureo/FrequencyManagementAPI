@@ -1,5 +1,8 @@
 package com.herminio.frequencymanagement.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +59,43 @@ public class FrequencyManagementService {
 		frequencyRepository.save(entity);
 		logger.info("Frequencia salva no banco de dados! ");
 	}
-
+	
+	public List<Frequency> getAllFrequencys() throws Exception {
+		Frequency frequency = null;
+		List<Frequency> listFrequency = new ArrayList<Frequency>();
+		
+		List<FrequencyEntity> entityList = frequencyRepository.findAll();
+		
+		for (FrequencyEntity frequencyEntity : entityList) {
+			frequency = Util.convertToModel(frequencyEntity);
+			listFrequency.add(frequency);
+		}
+		return listFrequency;
+	}
+	
+	public List<Company> getAllCompanies() throws Exception {
+		Company company = null;
+		List<Company> listCompany = new ArrayList<Company>();
+		
+		List<CompanyEntity> entityList = companyRepository.findAll();
+		
+		for (CompanyEntity companyEntity : entityList) {
+			company = Util.convertToModel(companyEntity);
+			listCompany.add(company);
+		}
+		return listCompany;
+	}
+	
+	public List<Employee> getAllEmployees() throws Exception {
+		Employee employee = null;
+		List<Employee> listEmployee = new ArrayList<Employee>();
+		
+		List<EmployeeEntity> entityList = employeeRepository.findAll();
+		
+		for (EmployeeEntity employeeEntity : entityList) {
+			employee = Util.convertToModel(employeeEntity);
+			listEmployee.add(employee);
+		}
+		return listEmployee;
+	}
 }

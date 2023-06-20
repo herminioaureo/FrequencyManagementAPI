@@ -14,5 +14,5 @@ public class Employee {
 	private int idemployee;
 	private String name;
 	private String role;
-	private int uuid;
+	private String uuid;
 }
