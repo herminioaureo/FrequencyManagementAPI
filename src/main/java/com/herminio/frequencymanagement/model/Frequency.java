@@ -2,9 +2,6 @@ package com.herminio.frequencymanagement.model;
 
 import java.util.Date;
 
-import com.herminio.frequencymanagement.entity.CompanyEntity;
-import com.herminio.frequencymanagement.entity.EmployeeEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,7 @@ public class Frequency {
 	private int idfrequency;
 	private Date dateTime;
 	private int uuid;
-	private CompanyEntity company;
-	private EmployeeEntity employee;
+	private Company company;
+	private Employee employee;
 	
 }

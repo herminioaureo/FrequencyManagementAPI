@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.herminio.frequencymanagement.model.Company;
 import com.herminio.frequencymanagement.model.Employee;
+import com.herminio.frequencymanagement.model.Frequency;
 import com.herminio.frequencymanagement.service.FrequencyManagementService;
 
 @RestController
@@ -40,7 +41,7 @@ public class FrequencyManagementAPI {
 	 }
 	 
 	 
-	 @PostMapping(path = "funcionario", 
+	 @PostMapping(path = "employee", 
 		        consumes = MediaType.APPLICATION_JSON_VALUE, 
 		        produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity saveEmployee(@RequestBody Employee request) {
@@ -53,6 +54,22 @@ public class FrequencyManagementAPI {
 		} catch (Exception e) {
 			logger.error("Erro generico ao salvar funcionario no banco de dados " + e.getCause().toString(),e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao salvar funcionario no banco de dados");
+		}
+	 }
+	 
+	 @PostMapping(path = "frequency", 
+		        consumes = MediaType.APPLICATION_JSON_VALUE, 
+		        produces = MediaType.APPLICATION_JSON_VALUE)
+	 public ResponseEntity saveFrequency(@RequestBody Frequency request) {
+		 
+		 
+		try {
+			service.saveFrequency(request);
+			return ResponseEntity.status(HttpStatus.OK).build();
+			
+		} catch (Exception e) {
+			logger.error("Erro generico ao salvar funcionario no banco de dados " + e.getCause().toString(),e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao salvar frequencia no banco de dados");
 		}
 	 }
 }
