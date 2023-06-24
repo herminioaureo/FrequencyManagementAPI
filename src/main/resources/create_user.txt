@@ -1,0 +1,2 @@
+create user 'frequencydb'@'localhost' identified by 'frequencydb';
+GRANT ALL PRIVILEGES ON * . * TO 'frequencydb'@'localhost';
