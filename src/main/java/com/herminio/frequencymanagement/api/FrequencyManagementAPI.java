@@ -16,6 +16,8 @@ import com.herminio.frequencymanagement.model.Company;
 import com.herminio.frequencymanagement.model.Employee;
 import com.herminio.frequencymanagement.model.Frequency;
 import com.herminio.frequencymanagement.service.FrequencyManagementService;
+import com.herminio.frequencymanagement.validation.impl.CompanyValidation;
+import com.herminio.frequencymanagement.validation.impl.EmployeeValidation;
 
 @RestController
 @RequestMapping("frequency")
@@ -26,35 +28,38 @@ public class FrequencyManagementAPI {
 	 @Autowired
 	 private FrequencyManagementService service;
 	 
-	 @PostMapping(path = "company", 
-		        consumes = MediaType.APPLICATION_JSON_VALUE, 
-		        produces = MediaType.APPLICATION_JSON_VALUE)
+	 @Autowired 
+	 private CompanyValidation companyValidation;
+	 
+	 @Autowired 
+	 private EmployeeValidation employeeValidation;
+	 
+	 @PostMapping(path = "company", consumes = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity saveCompany(@RequestBody Company request) {
 		
 		try {
+			companyValidation.validate(request);
 			service.saveCompany(request);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		
 		} catch (Exception e) {
-			logger.error("Erro generico ao salvar empresa no banco de dados " + e.getCause().toString(),e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao salvar empresa no banco de dados");
+			logger.error("Erro generico ao salvar empresa no banco de dados " + e.getMessage(), e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	 }
 	 
 	 
-	 @PostMapping(path = "employee", 
-		        consumes = MediaType.APPLICATION_JSON_VALUE, 
-		        produces = MediaType.APPLICATION_JSON_VALUE)
+	 @PostMapping(path = "employee", consumes = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity saveEmployee(@RequestBody Employee request) {
 		 
-		 
 		try {
+			employeeValidation.validate(request);
 			service.saveEmployee(request);
 			return ResponseEntity.status(HttpStatus.OK).build();
 			
 		} catch (Exception e) {
-			logger.error("Erro generico ao salvar funcionario no banco de dados " + e.getCause().toString(),e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro generico ao salvar funcionario no banco de dados");
+			logger.error("Erro generico ao salvar funcionario no banco de dados " + e.getMessage(), e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	 }
 	 
