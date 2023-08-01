@@ -4,8 +4,8 @@ Employee time management API that stores the start of the day, lunch break and t
 This app use:
 
 - Spring Boot
-- Java 20
+- Java 17
 - Spring Data
-- FlyAway
+- FlyAway Migrations
 
 Attention: There is a known bug in returning the time when using Insomnia rest client. I'll try to fix it as soon as I have time for this :P.
