@@ -7,5 +7,7 @@ This app use:
 - Java 17
 - Spring Data
 - FlyAway Migrations
+- Lombok
+- Log4J
 
-Attention: There is a known bug in returning the time when using Insomnia rest client. I'll try to fix it as soon as I have time for this :P.
+Attention: There is a known bug in returning the time when using Insomnia rest client. I'll try to fix it as soon as I have time for this :P
